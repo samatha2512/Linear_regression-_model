@@ -1,0 +1,30 @@
+x=data['Head Size(cm^3)'].values
+y=data['Brain Weight(grams)'].values
+xmean=np.mean(x)
+ymean=np.mean(y)
+n=len(x)
+num=0
+den=0
+for i in range(n):
+    num+=(x[i]-xmean)*(y[i]-ymean)
+    den+=(x[i]-xmean)**2
+m=num/den
+print(m)
+c=ymean-(m*xmean)
+print(c)
+maxx=np.max(x)+100
+minx=np.min(x)-100
+X=np.linspace(minx,maxx,1000)
+Y=m*X+c
+plt.plot(X,Y,color='orange',label='regression line')
+plt.scatter(x,y,color='green',label='Scatter plot')
+plt.legend()
+plt.show()
+num1=0
+den1=0
+for i in range(n):
+    ypred=m*x[i]+c
+    den1+=(y[i]-ymean)**2
+    num1+=(y[i]-ypred)**2
+r2=1-(num1/den1)
+print(r2)
